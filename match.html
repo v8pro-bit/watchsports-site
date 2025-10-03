@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatchSports - Streams links</title>
+   <link rel="icon" type="image/png" sizes="512x512" href="/watchsports.png">
+    <link rel="stylesheet" href="/style.css">
+  <style>
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+        <div class="site-container">
+            <a href="/" target="_blank" class="logo">WatchSports</a>
+            <nav class="nav-menu">
+                <a href="/sports/live-updates/">Live Sports Updates</a>
+                <a href="/support/contact-us/">Contact Us</a>
+                <a href="/info/terms-of-service/">Our Terms</a>
+            </nav>
+        </div>
+    </header>
+  <main>
+    <div class="match-hero">
+      <div class="league-tag">
+        <img id="leagueLogo" src="" alt="League Logo">
+        <span id="league"></span>
+      </div>
+      <div class="match-title" id="match-title"></div>
+      <div class="team-vs">
+        <div class="team-card">
+          <img id="homeLogo" src="" alt="Home Team Logo">
+          <span id="home"></span>
+        </div>
+        <div class="vs-badge">VS</div>
+        <div class="team-card">
+          <img id="awayLogo" src="" alt="Away Team Logo">
+          <span id="away"></span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="other">
+      Live Stream Links
+    </div>
+
+    <table class="streams-table">
+      <thead>
+        <tr>
+          <th>Streamer</th>
+          <th>Channel</th>
+          <th>Language</th>
+          <th>Quality</th>
+          <th>Ads</th>
+          <th>AdBlock</th>
+          <th>Bitrate</th>
+          <th>MISR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        <td><a class="stream-link" id="stream1">SportSurge</a></td>
+          <td>24/7 Online</td>
+          <td>English</td>
+          <td><b>HD</b></td>
+          <td>1</td>
+          <td>Yes</td>
+          <td>1200Kbps</td>
+          <td>2MB</td>
+        </tr>
+        <tr>
+          <td><a class="stream-link" id="stream2">HD-NFL</a></td>
+          <td>HD-NFL</td>
+          <td>English</td>
+          <td><b>FHD</b></td>
+          <td>2</td>
+          <td>No</td>
+          <td>1500Kbps</td>
+          <td>3MB</td>
+        </tr>
+         <tr>
+          <td><a class="stream-link" id="stream3">Guddu Streams</a></td>
+          <td>Sports Official</td>
+          <td>English</td>
+          <td><b>FHD</b></td>
+          <td>2</td>
+          <td>No</td>
+          <td>1500Kbps</td>
+          <td>3MB</td>
+        </tr>
+         <tr>
+          <td><a class="stream-link" id="stream4">My Best Streams</a></td>
+          <td>Surge Online</td>
+          <td>English</td>
+          <td><b>FHD</b></td>
+          <td>2</td>
+          <td>No</td>
+          <td>1500Kbps</td>
+          <td>3MB</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    function getParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    // Fill match details
+    document.getElementById("league").innerText = getParam("league");
+    document.getElementById("match-title").innerText = getParam("home") + " vs " + getParam("away");
+    document.getElementById("home").innerText = getParam("home");
+    document.getElementById("away").innerText = getParam("away");
+    document.getElementById("leagueLogo").src = getParam("leagueLogo");
+    document.getElementById("homeLogo").src = getParam("homeLogo");
+    document.getElementById("awayLogo").src = getParam("awayLogo");
+
+    // Assign embed link to ALL stream links (one time only)
+    const embedLink = getParam("embed");
+    if (embedLink) {
+      document.querySelectorAll(".stream-link").forEach(link => {
+        link.href = "https://doit123.pages.dev?embed=" + encodeURIComponent(embedLink);
+      });
+    }
+  </script>
+  <script>
+    const embedUrl = new URLSearchParams(window.location.search).get("embed");
+
+    if (!embedUrl) {
+      // Agar koi embed na ho → black theme show kare
+      document.body.style.background = "black";
+      document.body.innerHTML = "<h2 style='color:white; text-align:center; margin-top:20%;'>No Stream Available</h2>";
+    }
+  </script>
+   </div>
+    <footer class="site-footer" role="contentinfo" aria-label="Footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo" aria-hidden="true">WS</div>
+                <div>
+                    <div class="brand-name">WatchSports</div>
+                    <div class="desc">
+                        Your trusted source for live sports streaming — NFL, NBA, Cricket, Soccer, UFC, F1, Tennis &
+                        more.<br>
+                        Watch games live in HD, anytime, anywhere with WatchSports. Use responsibly and follow your
+                        local laws.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-credits">
+            © <span id="yr"></span> WatchSports — All rights reserved.<br>
+            WatchSports does not host or stream any media content. All links are provided for informational and
+            educational purposes only.
+        </div>
+    </footer>
+    <script>
+        document.getElementById("yr").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
